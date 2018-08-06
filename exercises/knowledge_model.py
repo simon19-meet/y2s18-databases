@@ -12,5 +12,14 @@ class Knowledge(Base):
 	topic=Column(String)
 	rating=Column(Integer)
 	
+	def __repr__(self):
+		if self.rating<7:
+			return "Unfortunately, this article does not have a better rating. Maybe, this is an article that should be replaced soon!."
+		return("If you want to learn about {},"
+		" you should look at the Wikipedia article called {}."
+		" We gave this article a rating of {} out of 10!"
+		"ID:{}").format(self.topic,self.wiki_name,self.rating,self.student_id)
 
-	pass
+	
+x=Knowledge(student_id=44,wiki_name="rainbow",topic="weather",rating=9)
+print(x)
