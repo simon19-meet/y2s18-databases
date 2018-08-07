@@ -44,9 +44,14 @@ def edit_article_rating(updated_rating,article_title):
 	session.commit()
 
 def delete_article_by_rating(threshold):
-	return "#nohomo"
+	session.query(Knowledge).filter(Knowledge.rating<threshold).delete()
+	session.commit()
 
-#add_article("Warframe","Gay",8)
+def get_top_rated_5():
+	a=session.query(Knowledge).order_by(Knowledge.rating).limit(5)
+	return a
+
+add_article("Warframe","Yo",4)
 #delete_all_articles()
 
 #print(query_article_by_topic("Jeff"))
@@ -54,5 +59,8 @@ def delete_article_by_rating(threshold):
 #print(query_article_by_rating(10))
 #print(query_article_by_primary_key(6))
 #delete_article_by_topic("Games")
-edit_article_rating(9,"Warframe")
-print(query_all_articles())
+#edit_article_rating(5,"Warframe")
+#print(query_article_by_topic("Gay"))
+#delete_article_by_rating(9)
+print(get_top_rated_5())
+#print(query_all_articles())
