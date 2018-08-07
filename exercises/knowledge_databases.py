@@ -21,15 +21,38 @@ def query_article_by_topic(topic):
 	a=session.query(Knowledge).filter_by(topic=topic)
 	return a
 
-def delete_article_by_topic():
-	pass
+def query_article_by_rating(threshold):
+	a=session.query(Knowledge).filter(Knowledge.rating<threshold).all()
+	return a
+
+def query_article_by_primary_key(id):
+	a=session.query(Knowledge).filter_by(student_id=id).all()
+	return a
+
+def delete_article_by_topic(topic):
+	session.query(Knowledge).filter_by(topic=topic).delete()
+	session.commit()
+
 
 def delete_all_articles():
-	pass
+	session.query(Knowledge).delete()
+	session.commit()
 
-def edit_article_rating():
-	pass
+def edit_article_rating(updated_rating,article_title):
+	art_rate=session.query(Knowledge).filter_by(wiki_name=article_title).first()
+	art_rate.rating=updated_rating
+	session.commit()
 
-add_article("Warframe","Jeff",10)
-#print(query_all_articles())
-print(query_article_by_topic("Jeff"))
+def delete_article_by_rating(threshold):
+	return "#nohomo"
+
+#add_article("Warframe","Gay",8)
+#delete_all_articles()
+
+#print(query_article_by_topic("Jeff"))
+
+#print(query_article_by_rating(10))
+#print(query_article_by_primary_key(6))
+#delete_article_by_topic("Games")
+edit_article_rating(9,"Warframe")
+print(query_all_articles())
